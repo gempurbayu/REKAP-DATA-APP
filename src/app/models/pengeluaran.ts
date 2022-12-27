@@ -1,5 +1,5 @@
 export interface IPengeluaran {
-    name: string,
+    nama: string,
     tgl_pengeluaran : Date,
     jenis_pengeluaran : string,
     nominal : number,
