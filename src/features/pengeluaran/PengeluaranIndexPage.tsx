@@ -22,7 +22,45 @@ function PengeluaranIndexPage() {
             dataIndex: 'nama',
             key: 'nama',
             fixed: 'left',
-        }
+        },
+        {
+            title: 'Tanggal',
+            width: 150,
+            dataIndex: 'tgl_pengeluaran',
+            key: 'tgl_pengeluaran',
+            fixed: 'left',
+        },
+        {
+            title: 'Jenis Pengeluaran',
+            width: 150,
+            dataIndex: 'jenis_pengeluaran',
+            key: 'jenis_pengeluaran',
+            fixed: 'left',
+        },
+        {
+            title: 'Nominal',
+            width: 150,
+            dataIndex: 'nominal',
+            key: 'nominal',
+            fixed: 'left',
+            render: (row) => {
+                return (row).toLocaleString('id-ID', { style: 'currency', currency: 'IDR' });
+            }
+        },
+        {
+            title: 'Keterangan',
+            width: 150,
+            dataIndex: 'keterangan',
+            key: 'keterangan',
+            fixed: 'left',
+        },
+        {
+            title: 'Created By',
+            width: 150,
+            dataIndex: 'created_by',
+            key: 'created_by',
+            fixed: 'left',
+        },
     ]
     
   return (
