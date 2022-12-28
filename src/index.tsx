@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { store, StoreContext } from './app/stores/store';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import PengeluaranIndexPage from './features/pengeluaran/PengeluaranIndexPage';
+import Dashboard from './app/component/layouts/Dashboard';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -14,7 +15,13 @@ const root = ReactDOM.createRoot(
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <PengeluaranIndexPage/>,
+    element: <Dashboard/>,
+    children: [
+      {
+        path: "pengeluaran",
+        element: <PengeluaranIndexPage/>
+      }
+    ]
   },
 ]);
 
