@@ -1,6 +1,4 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
-//import { store } from '../stores/store';
-import { useNavigate } from 'react-router-dom';
 import { IPengeluaran } from '../models/pengeluaran';
 
 const sleep = (delay: number) => {
@@ -22,7 +20,6 @@ axios.interceptors.response.use(async response => {
     response = readResponseHeader(response);
     return response;
 }, (error: AxiosError<any>) => {
-    const navigate = useNavigate();
     const { data, status, config } = error.response!;
     console.log(error.response!);
 
@@ -32,7 +29,7 @@ axios.interceptors.response.use(async response => {
                 alert('error, ' + data);
             }
             if (config.method === 'get' && data.errors.hasOwnProperty('id')) {
-                navigate('/not-found');
+
             }
             if (data.errors) {
                 const modalStateErrors = [];
@@ -52,10 +49,10 @@ axios.interceptors.response.use(async response => {
             alert('Error 403 (Forbidden)');
             break;
         case 404:
-            navigate('/not-found');
+            alert('not-found');
             break;
         case 500:
-            navigate('/server-error');
+            alert(status);
             break;
     }
     return Promise.reject(error);
@@ -97,6 +94,7 @@ const requests = {
 
 const Pengeluaran = {
     list: () => requests.get<IPengeluaran[]>('/pengeluaran'),
+    create: (data:IPengeluaran) => requests.post<IPengeluaran>('/pengeluaran', data),
 }
 
 
