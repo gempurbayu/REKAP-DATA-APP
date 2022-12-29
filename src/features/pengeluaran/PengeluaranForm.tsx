@@ -29,6 +29,7 @@ function PengeluaranForm() {
 
     const [messageApi, contextHolder] = message.useMessage();
     const { pengeluaranStore } = useStore();
+    const [form] = Form.useForm();
 
     const [pengeluaran, setPengeluaran] = useState<IPengeluaran>(initialValue);
 
@@ -40,7 +41,11 @@ function PengeluaranForm() {
         }
     }
 
-    const handleSubmit = async () => {
+    const onFinishFailed = () => {
+        message.error('Isi form dengan lengkap!');
+      };
+
+      const onFinish = async () => {
         await pengeluaranStore.create(pengeluaran);
         messageApi.open({
             type: 'success',
@@ -48,41 +53,57 @@ function PengeluaranForm() {
             duration: 2.5
           });
         setPengeluaran(initialValue);
-    }
+        form.resetFields();
+      };
 
   return (
     <Card title="Tambah Pengeluaran" bordered={false} headStyle={{backgroundColor: "#1677ff", color: 'white' }} style={{ minHeight: 360, background: "white", borderRadius: 10 }}>
       {contextHolder}
       <Form
+        form={form}
         labelCol={{ span: 4 }}
         wrapperCol={{ span: 14 }}
         layout="vertical"
+        onFinishFailed={onFinishFailed}
+        onFinish={onFinish}
+        autoComplete="off"
+        initialValues={initialValue}
       >
-        <Form.Item label="Nama Pengeluaran">
+        <Form.Item label="Nama Pengeluaran" name="nama" rules={[{ required: true }, { type:'string', warningOnly: true }, { type: 'string', min: 2 }]} required>
           <Input onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPengeluaran({...pengeluaran, [e.target.name] : e.target.value})} name="nama"/>
         </Form.Item>
-        <Form.Item label="Jenis Pengeluaran">
+        <Form.Item label="Jenis Pengeluaran" name="jenis pengeluaran" rules={[{ required: true }, { type:'string', warningOnly: true }]}>
           <Select className="jenis_pengeluaran" placeholder="Pilih Jenis Pengeluaran" onChange={(e) => setPengeluaran({...pengeluaran, jenis_pengeluaran : e})}>
             <Select.Option value="produksi">Produksi</Select.Option>
             <Select.Option value="operasional">Operasional</Select.Option>
             <Select.Option value="gaji">Gaji</Select.Option>
           </Select>
         </Form.Item>
-        <Form.Item label="Tanggal Pengeluaran">
+        <Form.Item label="Tanggal Pengeluaran" name="tanggal" rules={[{ required: true }, { type:'date', warningOnly: true }]}>
           <DatePicker
-            defaultValue={dayjs(new Date())} 
             disabledDate={d => !d || d.isAfter(new Date())}
             onChange={(e) => handleDate(e)}
             name="tgl_pengeluaran"  
+            placeholder='pilih tanggal'
           />
         </Form.Item>
-        <Form.Item label="Nominal">
+        <Form.Item label="Nominal" name="nominal" rules={[{ required: true }, { type:'number', warningOnly: true }, { type: 'number', min: 2 }]}>
           <InputNumber prefix="Rp" style={{ width: '100%' }} onChange={(e:number | null) => setPengeluaran({...pengeluaran, nominal : e})} name="nominal"/>
         </Form.Item>
         <Form.Item label="Keterangan">
           <TextArea rows={2} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setPengeluaran({...pengeluaran, [e.target.name] : e.target.value})} name="keterangan"/>
         </Form.Item>
-        <Button style={{ backgroundColor : "green", color: "white", width: 100, height: 40 }} onClick={() => handleSubmit()}>Submit</Button>
+        <Form.Item>
+        <Button 
+          type="primary"
+          htmlType="submit"
+          style={{ backgroundColor : "green", color: "white", width: 100, height: 40 }}
+          disabled={pengeluaranStore.loadingForm}
+          loading = {pengeluaranStore.loadingForm}
+        >
+          Submit
+        </Button>
+      </Form.Item>
       </Form>
     </Card>
   );
