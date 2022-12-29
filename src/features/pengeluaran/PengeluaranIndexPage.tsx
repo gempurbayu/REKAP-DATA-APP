@@ -1,7 +1,6 @@
 import { observer } from 'mobx-react-lite'
 import React, { useEffect } from 'react'
 import { useStore } from '../../app/stores/store';
-import { toJS } from 'mobx';
 import { Table } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import { IPengeluaran } from '../../app/models/pengeluaran';
@@ -10,10 +9,8 @@ function PengeluaranIndexPage() {
     const { pengeluaranStore } = useStore();
 
     useEffect(() => {
-      pengeluaranStore.getExampleList();
+      pengeluaranStore.getList();
     },[pengeluaranStore]);
-  
-    console.log(toJS(pengeluaranStore.data));
 
     const columns: ColumnsType<IPengeluaran> = [
         {
@@ -64,7 +61,9 @@ function PengeluaranIndexPage() {
     ]
     
   return (
-    <Table columns={columns} dataSource={pengeluaranStore.data} rowKey="id" scroll={{ x: 1200, y: 300 }} />
+    <div style={{ padding: 24, minHeight: 360, background: "white", borderRadius: 10 }}>
+        <Table columns={columns} dataSource={pengeluaranStore.data} rowKey="id" scroll={{x: 100, y: 300 }} />
+    </div>    
   )
 }
 

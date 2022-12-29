@@ -11,10 +11,10 @@ export default class PengeluaranStore {
     }
 
     updateGridCallback = action(() => {
-        this.getExampleList();
+        this.getList();
     })
 
-    getExampleList = async () => {
+    getList = async () => {
         try {
             const result = await agent.Pengeluaran.list();
             this.setPengeluaranData(result);
@@ -26,6 +26,14 @@ export default class PengeluaranStore {
 
     setPengeluaranData = (res : Array<IPengeluaran>) => {
         this.data = res;
+    }
+
+    create = async (data: IPengeluaran) => {
+        try {
+            await agent.Pengeluaran.create(data);
+        } catch (error) {
+            throw(error);
+        }
     }
 
 }

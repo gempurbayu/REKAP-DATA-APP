@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Breadcrumb, Layout, theme } from 'antd';
+import { Layout, theme } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
@@ -19,19 +19,15 @@ function Dashboard() {
     <Layout style={{ minHeight: '100vh' }}>
       <Sidebar collapse={collapsed}/>
       <Layout className="site-layout">
-        <Header style={{ paddingLeft: 10,marginTop: 20 , background: colorBgContainer }}>
+        <Header style={{ padding: 5, marginLeft: 20, marginRight: 20, marginTop: 20 , background: colorBgContainer, borderRadius: 10 }}>
         {collapsed? 
         (<MenuUnfoldOutlined style={{ fontSize : 30, marginLeft : 10 }} onClick={() => setCollapsed(false)}/>): 
         (<MenuFoldOutlined style={{ fontSize : 30, marginLeft : 10 }} onClick={() => setCollapsed(true)}/>)}
         </Header>
-        <Content style={{ margin: '0 16px' }}>
-          <Breadcrumb style={{ margin: '16px 0' }}>
-            <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Bill</Breadcrumb.Item>
-          </Breadcrumb>
+        <Content style={{ margin: '10px 16px' }}>
           <Outlet/>
         </Content>
-        <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+        <Footer style={{ textAlign: 'center' }}>Gempur Dev @2022</Footer>
       </Layout>
     </Layout>
   );
