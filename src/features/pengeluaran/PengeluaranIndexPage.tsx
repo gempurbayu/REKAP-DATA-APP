@@ -1,69 +1,72 @@
 import { observer } from 'mobx-react-lite'
 import React, { useEffect } from 'react'
 import { useStore } from '../../app/stores/store';
-import { Table } from 'antd';
-import { ColumnsType } from 'antd/es/table';
-import { IPengeluaran } from '../../app/models/pengeluaran';
+import { Col, DatePicker, List, Row, Typography } from 'antd';
+import dayjs from 'dayjs';
+import '../../index.css';
 
 function PengeluaranIndexPage() {
     const { pengeluaranStore } = useStore();
+    const { Title } = Typography;
 
     useEffect(() => {
       pengeluaranStore.getList();
     },[pengeluaranStore]);
 
-    const columns: ColumnsType<IPengeluaran> = [
-        {
-            title: 'Nama',
-            width: 150,
-            dataIndex: 'nama',
-            key: 'nama',
-            fixed: 'left',
-        },
-        {
-            title: 'Tanggal',
-            width: 150,
-            dataIndex: 'tgl_pengeluaran',
-            key: 'tgl_pengeluaran',
-            fixed: 'left',
-        },
-        {
-            title: 'Jenis Pengeluaran',
-            width: 150,
-            dataIndex: 'jenis_pengeluaran',
-            key: 'jenis_pengeluaran',
-            fixed: 'left',
-        },
-        {
-            title: 'Nominal',
-            width: 150,
-            dataIndex: 'nominal',
-            key: 'nominal',
-            fixed: 'left',
-            render: (row) => {
-                return (row).toLocaleString('id-ID', { style: 'currency', currency: 'IDR' });
-            }
-        },
-        {
-            title: 'Keterangan',
-            width: 150,
-            dataIndex: 'keterangan',
-            key: 'keterangan',
-            fixed: 'left',
-        },
-        {
-            title: 'Created By',
-            width: 150,
-            dataIndex: 'created_by',
-            key: 'created_by',
-            fixed: 'left',
-        },
-    ]
+    const handleDate = (e: dayjs.Dayjs | null) => {
+        if(e){
+            const tgl = e.format('YYYY-MM-DD');
+            pengeluaranStore.getListByDate(tgl);
+        }
+    }
+
+    useEffect(() => {
+        pengeluaranStore.getListByDate(dayjs(new Date()).format('YYYY-MM-DD'));
+    },[pengeluaranStore]);
     
   return (
-    <div style={{ padding: 24, minHeight: 360, background: "white", borderRadius: 10 }}>
-        <Table columns={columns} dataSource={pengeluaranStore.data} rowKey="id" scroll={{x: 100, y: 300 }} />
-    </div>    
+    <Row gutter={[0, 24]} justify="center" >
+        <Col xs={24} sm={24} md={24} lg={12} style={{ minHeight: 200, background: "#5b8c00", borderRadius: 10, padding: 20 }}>
+        <Typography style={{ marginTop: 10, color: 'white'}}>Pilih Tanggal</Typography>
+            <DatePicker
+                disabledDate={d => !d || d.isAfter(new Date())}
+                onChange={(e) => handleDate(e)}
+                name="tgl_pengeluaran"  
+                placeholder='pilih tanggal'
+                size='large'
+                style={{ width: "50%", borderRadius:8, marginTop: 10, backgroundColor: 'white' }}
+                defaultValue={dayjs(new Date())}
+                className="ant-picker-input"
+            />
+        </Col>
+        <Col xs={24} sm={24} md={24} lg={12} style={{ maxHeight: 550, borderRadius: 20 }}>
+            <Title level={4} style={{marginTop: -7, color: '#5b8c00'}}>Daftar Pengeluaran</Title>
+            <div 
+            style={{
+            height: 500,
+            overflow: 'overlay',
+            }}
+            id="list-pengeluaran"
+            >
+            <List
+            dataSource={pengeluaranStore.dataByDate?.data}
+            loading={pengeluaranStore.loadingList}
+            renderItem={(item, idx) => (
+                <List.Item key={idx} style={{marginBottom: 20, border: 2, backgroundColor: "white", borderRadius: 15}}>
+                <List.Item.Meta
+                    title={<a href="https://ant.design" style={{ color: '#5b8c00' }}>{item.nama}</a>}
+                    description={item.jenis_pengeluaran}
+                />
+                <div><Typography>{item.nominal!.toLocaleString('en-US', {
+  style: 'currency',
+  currency: 'USD',
+})}</Typography></div>
+                </List.Item>
+            )}
+            />
+            </div>
+        </Col>
+    </Row>    
   )
 }
 

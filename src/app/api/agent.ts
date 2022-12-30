@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { IPengeluaran } from '../models/pengeluaran';
+import { IPengeluaran, IPengeluaranByDate } from '../models/pengeluaran';
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -52,7 +52,7 @@ axios.interceptors.response.use(async response => {
             alert('not-found');
             break;
         case 500:
-            alert(status);
+            alert(error.response?.data.message);
             break;
     }
     return Promise.reject(error);
@@ -95,6 +95,7 @@ const requests = {
 const Pengeluaran = {
     list: () => requests.get<IPengeluaran[]>('/pengeluaran'),
     create: (data:IPengeluaran) => requests.post<IPengeluaran>('/pengeluaran', data),
+    listByDate: (date: string) => requests.get<IPengeluaranByDate>(`/pengeluaran/tanggal/${date}`)
 }
 
 
