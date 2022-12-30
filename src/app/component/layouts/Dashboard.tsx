@@ -18,7 +18,7 @@ function Dashboard() {
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sidebar collapse={collapsed}/>
-      <Layout className="site-layout">
+      <Layout style={{ backgroundColor: '#f5f5f5' }}>
         <Header style={{ padding: 5, marginLeft: 20, marginRight: 20, marginTop: 20 , background: colorBgContainer, borderRadius: 10 }}>
         {collapsed? 
         (<MenuUnfoldOutlined style={{ fontSize : 30, marginLeft : 10 }} onClick={() => setCollapsed(false)}/>): 

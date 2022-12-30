@@ -25,6 +25,7 @@ function getItem(
 const items: MenuItem[] = [
   getItem('Dashboard', '/', <PieChartOutlined />),
   getItem('Pengeluaran', '/pengeluaran', <DesktopOutlined />, [
+    getItem('List Pengeluaran', '/pengeluaran/'),
     getItem('Input Pengeluaran', '/pengeluaran/form'),
   ]),
   getItem('User', 'sub1', <UserOutlined />, [
