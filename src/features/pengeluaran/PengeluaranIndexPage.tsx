@@ -8,7 +8,7 @@ import { PlusCircleFilled } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 
 function PengeluaranIndexPage() {
-    const { pengeluaranStore } = useStore();
+    const { pengeluaranStore, commonStore } = useStore();
     const { Title } = Typography;
     const navigate = useNavigate();
 
@@ -26,10 +26,14 @@ function PengeluaranIndexPage() {
     useEffect(() => {
         pengeluaranStore.getListByDate(dayjs(new Date()).format('YYYY-MM-DD'));
     },[pengeluaranStore]);
+
+    useEffect(() => {
+        commonStore.setTitle('Pengeluaran');
+    });   
     
   return (
     <Row gutter={[0, 24]} justify="center" >
-        <div style={{ display: 'inline-flex', width: "100%", height: 40, paddingLeft: 10, paddingRight: 10, justifyContent: "center", alignItems: "center" }}>
+        <div style={{ display: 'inline-flex', width: "100%", height: 30, justifyContent: "center", alignItems: "center" }}>
             <Typography style={{ fontSize: 16, marginRight: 10, color: 'gray' }}>Pilih Tanggal</Typography>
             <DatePicker
                 disabledDate={d => !d || d.isAfter(new Date())}

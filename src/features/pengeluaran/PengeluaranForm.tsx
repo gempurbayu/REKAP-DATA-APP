@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Form,
   Input,
@@ -28,7 +28,7 @@ const { TextArea } = Input;
 function PengeluaranForm() {
 
     const [messageApi, contextHolder] = message.useMessage();
-    const { pengeluaranStore } = useStore();
+    const { pengeluaranStore, commonStore } = useStore();
     const [form] = Form.useForm();
 
     const [pengeluaran, setPengeluaran] = useState<IPengeluaran>(initialValue);
@@ -55,6 +55,10 @@ function PengeluaranForm() {
         setPengeluaran(initialValue);
         form.resetFields();
       };
+
+      useEffect(() => {
+        commonStore.setTitle('Pengeluaran');
+      });   
 
   return (
     <Card title="Tambah Pengeluaran" bordered={false} headStyle={{backgroundColor: "#1677ff", color: 'white' }} style={{ minHeight: 360, background: "white", borderRadius: 10 }}>
