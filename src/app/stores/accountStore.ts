@@ -32,6 +32,7 @@ export default class AccountStore {
     logout = async () => {
         store.commonStore.setToken(null);
         this.setUser(null);
+        this.setUserInfo(null);
         window.location.replace("/login"); 
     }
 
