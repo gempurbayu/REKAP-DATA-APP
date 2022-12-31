@@ -1,10 +1,7 @@
-import { DesktopOutlined, FileOutlined, PieChartOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons';
-import { Layout, Menu, MenuProps, Typography } from 'antd'
+import { CloseOutlined, DesktopOutlined, FileOutlined, PieChartOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons';
+import { Drawer, Menu, MenuProps } from 'antd'
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
-
-const { Sider } = Layout;
-const { Title } = Typography;
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -38,25 +35,21 @@ const items: MenuItem[] = [
 ];
 
 interface sideProps {
-    collapse: boolean
+    collapse: boolean,
+    setClose : () => void
 }
 
 function Sidebar(props : sideProps) {
 
-  const { collapse } = props;
+  const { collapse, setClose } = props;
   const navigate = useNavigate();
 
-  let w = 0;
-  collapse? w =220 : w=0;
-
-
   return (
-    <Sider trigger={null} collapsedWidth="0" width={w}>
-        <div style={{ width: "100%", textAlign: "left", marginLeft: 30}}>
-            <Title level={3} style={{color : "white"}}>Rekap Data</Title>
+    <Drawer open={collapse} onClose={setClose} closeIcon={<CloseOutlined style={{ color: 'white' }}/>} title={<p style={{ color: 'white', fontSize:24 }}>Rekap Data</p>} placement="left" style={{ backgroundColor: '#001529'}} width='250px'>
+        <div style={{ width: "100%", textAlign: "left", marginLeft: 30, marginTop: -40}}>
         </div>
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} onClick={(e) => navigate(e.key)} />
-    </Sider>
+        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} onClick={(e) => {navigate(e.key); setClose()}} />
+    </Drawer>
   )
 }
 

@@ -10,6 +10,10 @@ const { Header, Content, Footer } = Layout;
 function Dashboard() {
 
     const [collapsed, setCollapsed] = useState(false);
+
+    const setClose = () => {
+      setCollapsed(false);
+    }
   
     const {
         token: { colorBgContainer },
@@ -17,7 +21,7 @@ function Dashboard() {
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
-      <Sidebar collapse={collapsed}/>
+      <Sidebar collapse={collapsed} setClose={setClose}/>
       <Layout style={{ backgroundColor: '#f5f5f5' }}>
         <Header style={{ padding: 5, marginLeft: 20, marginRight: 20, marginTop: 20 , background: colorBgContainer, borderRadius: 10 }}>
         {collapsed? 
