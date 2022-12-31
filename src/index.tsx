@@ -4,35 +4,15 @@ import './index.css';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import { store, StoreContext } from './app/stores/store';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import PengeluaranIndexPage from './features/pengeluaran/PengeluaranIndexPage';
-import Dashboard from './app/component/layouts/Dashboard';
-import PengeluaranForm from './features/pengeluaran/PengeluaranForm';
+import App from './App';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Dashboard/>,
-    children: [
-      {
-        path: "pengeluaran",
-        element: <PengeluaranIndexPage/>
-      },
-      {
-        path: "pengeluaran/form",
-        element: <PengeluaranForm/>
-      },
-    ]
-  },
-]);
-
 root.render(
   <StoreContext.Provider value={store}>
-    <RouterProvider router={router} />
+    <App/>
   </StoreContext.Provider>
 );
 
