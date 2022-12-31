@@ -14,12 +14,13 @@ function Dashboard() {
     const { commonStore, accountStore } = useStore();
     
     if (!accountStore.isLoggedIn) {
-      return <Navigate to="/auth/login" />;
+      return <Navigate to="/login" />;
     } 
 
     const setClose = () => {
       setCollapsed(false);
     } 
+
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sidebar collapse={collapsed} setClose={setClose}/>

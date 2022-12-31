@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { IAccountInfo, IAccountLoginValues, IAccountRegisterValues } from '../models/account';
+import { IAccountInfo, IAccountLoginValues, IAccountRegisterValues, ILoginInfo } from '../models/account';
 import { IPengeluaran, IPengeluaranByDate } from '../models/pengeluaran';
 import { store } from '../stores/store';
 
@@ -100,8 +100,9 @@ const Pengeluaran = {
 }
 
 const Account = {
-    login: (user: IAccountLoginValues) => requests.post<IAccountInfo>('/api/login', user),
-    register: (user: IAccountRegisterValues) => requests.post<IAccountInfo>('/api/register', user)
+    me: () => requests.post<IAccountInfo>('/me'),
+    login: (user: IAccountLoginValues) => requests.post<ILoginInfo>('/login', user),
+    register: (user: IAccountRegisterValues) => requests.post<ILoginInfo>('/register', user)
 }
 
 const agent = {

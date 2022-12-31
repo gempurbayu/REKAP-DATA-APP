@@ -11,7 +11,16 @@ export interface IAccountRegisterValues {
 }
 
 export interface IAccountInfo {
-    email: string;
-    name: string;
-    token: string;
+    created_at: Date,
+    email: string,
+    email_verified_at: string,
+    id: number,
+    name: string,
+    update_at: Date
+}
+
+export interface ILoginInfo {
+    access_token: string;
+    token_type: string,
+    expires_in: number
 }

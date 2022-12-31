@@ -36,7 +36,6 @@ function PengeluaranForm() {
     const handleDate = (e: dayjs.Dayjs | null) => {
         if(e){
             const tgl = e.format('YYYY-MM-DD');
-            console.log(tgl);
             setPengeluaran({...pengeluaran, tgl_pengeluaran : tgl});
         }
     }
