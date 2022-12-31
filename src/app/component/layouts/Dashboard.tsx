@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Layout, Typography } from 'antd';
 import { observer } from 'mobx-react-lite';
-import { Outlet } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import { MenuOutlined } from '@ant-design/icons';
 import { useStore } from '../../stores/store';
@@ -11,7 +11,11 @@ const { Header, Content, Footer } = Layout;
 function Dashboard() {
 
     const [collapsed, setCollapsed] = useState(false);
-    const { commonStore } = useStore();
+    const { commonStore, accountStore } = useStore();
+    
+    if (!accountStore.isLoggedIn) {
+      return <Navigate to="/auth/login" />;
+    } 
 
     const setClose = () => {
       setCollapsed(false);
