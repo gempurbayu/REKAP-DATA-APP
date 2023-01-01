@@ -22,7 +22,3 @@ code {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
-
-.ant-select-selection__placeholder{
-  color : white;
-}
