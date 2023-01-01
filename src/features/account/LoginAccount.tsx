@@ -37,7 +37,7 @@ const { accountStore } = useStore();
     <Layout style={{width: '100wh', height: '100vh'}}>
       <Content style={{width: '100wh', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#fcffe6'}}>
       <div style={{ width: 400,height: 300 ,padding: 10, backgroundColor: 'white', display: 'flex', alignItems: 'center', flexDirection: 'column', borderRadius: 20}}>
-        <Title level={3} style={{ color: '#3f6600', marginBottom: -10}}>Welcome Back</Title>
+        <Title level={3} style={{ color: '#3f6600', marginBottom: -10}}>Welcome To Rekapin</Title>
         <p style={{ color: '#8c8c8c', marginBottom: 25}}>Enter your credentials to access the Apps</p>
         <Form
           name="basic"

@@ -5,6 +5,7 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import { store, StoreContext } from './app/stores/store';
 import App from './App';
+import { ToastContainer } from 'react-toastify';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -13,6 +14,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <StoreContext.Provider value={store}>
     <App/>
+    <ToastContainer />
   </StoreContext.Provider>
 );
 
