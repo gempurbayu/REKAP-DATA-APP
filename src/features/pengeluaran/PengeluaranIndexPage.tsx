@@ -31,7 +31,6 @@ function PengeluaranIndexPage() {
     useEffect(() => {
         commonStore.setTitle('Pengeluaran');
     });   
-    
   return (
     <Row gutter={[0, 24]} justify="center" >
         <div style={{ display: 'inline-flex', width: "100%", height: 30, justifyContent: "center", alignItems: "center" }}>
