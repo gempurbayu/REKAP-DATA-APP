@@ -1,4 +1,4 @@
-import { CloseOutlined, DesktopOutlined, FileOutlined, PieChartOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons';
+import { CloseOutlined, CreditCardOutlined, FileOutlined, MinusSquareOutlined, PieChartOutlined, PlusSquareOutlined, TeamOutlined } from '@ant-design/icons';
 import { Drawer, Menu, MenuProps } from 'antd'
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
@@ -21,17 +21,18 @@ function getItem(
 
 const items: MenuItem[] = [
   getItem('Dashboard', '/', <PieChartOutlined />),
-  getItem('Pengeluaran', '/pengeluaran', <DesktopOutlined />, [
+  getItem('Pemasukan', '/pemasukan', <PlusSquareOutlined />, [
+    getItem('List Pemasukan', '/pemasukan/'),
+    getItem('Input Pemasukan', '/pemasukan/form'),
+  ]),
+  getItem('Pengeluaran', '/pengeluaran', <MinusSquareOutlined />, [
     getItem('List Pengeluaran', '/pengeluaran/'),
     getItem('Input Pengeluaran', '/pengeluaran/form'),
   ]),
-  getItem('User', 'sub1', <UserOutlined />, [
-    getItem('Tom', '3'),
-    getItem('Bill', '4'),
-    getItem('Alex', '5'),
+  getItem('Belanja', '/belanja', <CreditCardOutlined />, [
+    getItem('List Belanja', '/belanja/'),
+    getItem('Input Belanja', '/belanja/form'),
   ]),
-  getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
-  getItem('Files', '9', <FileOutlined />),
 ];
 
 interface sideProps {

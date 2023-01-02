@@ -62,7 +62,11 @@ const { accountStore } = useStore();
             </Form.Item>
 
             <Form.Item>
-              <Button type="primary" htmlType="submit" style={{ width: 300,height: 40,backgroundColor: '#a0d911' }}>
+              <Button
+               type="primary" htmlType="submit" style={{ width: 300,height: 40,backgroundColor: '#a0d911' }}
+               disabled={accountStore.loadingLogin}
+               loading = {accountStore.loadingLogin}
+               >
                 Sign In
               </Button>
             </Form.Item>
