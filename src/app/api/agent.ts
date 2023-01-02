@@ -44,7 +44,9 @@ axios.interceptors.response.use(async response => {
             }
             break;
         case 401:
-            alert(data);
+            if(data.error){
+                alert(data.error);
+            }
             break;
         case 403:
             alert('Error 403 (Forbidden)');

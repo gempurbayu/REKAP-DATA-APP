@@ -6,6 +6,7 @@ import dayjs from 'dayjs';
 import '../../index.css';
 import { PlusCircleFilled } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
+import { toPercentByCategory } from '../../app/config/enum';
 
 function PengeluaranIndexPage() {
     const { pengeluaranStore, commonStore } = useStore();
@@ -60,21 +61,21 @@ function PengeluaranIndexPage() {
                     <Row justify='center' style={{ marginTop: 20, marginLeft: -15 }}>
                         <Col style={{ backgroundColor: '#fadb14', height: 120, borderRadius: 5, padding: 10}} xs={{ span: 7, offset: 1 }} lg={{ span: 6, offset: 2 }}>
                             <div style={{ textAlign: "center", marginBottom: 10 }}>
-                                <Progress type="circle" percent={Math.floor((pengeluaranStore.dataByDate?.nominal_jenis.produksi || 0) / (pengeluaranStore.dataByDate?.total_pengeluaran || 0) * 100)} width={50} trailColor="#ffec3d" strokeColor="#52c41a" strokeWidth={15} style={{ color: 'white' }} />
+                                <Progress type="circle" percent={toPercentByCategory(pengeluaranStore.dataByDate?.nominal_jenis.produksi, pengeluaranStore.dataByDate?.total_pengeluaran)} width={50} trailColor="#ffec3d" strokeColor="#52c41a" strokeWidth={15} style={{ color: 'white' }} />
                                 <Typography style={{ fontWeight: 500, color: '#876800', fontSize: 12, marginTop: 3 }}>Produksi</Typography>
                                 <Typography style={{ fontWeight: 500, color: 'black', fontSize: 12 }}>Rp {Number(pengeluaranStore.dataByDate?.nominal_jenis.produksi).toLocaleString()}</Typography>
                             </div>
                         </Col>
                         <Col style={{ backgroundColor: '#fadb14', height: 120, borderRadius: 5, padding: 10}} xs={{ span: 7, offset: 1 }} lg={{ span: 6, offset: 2 }}>
                         <div style={{ textAlign: "center", marginBottom: 10 }}>
-                            <Progress type="circle" percent={Math.floor((pengeluaranStore.dataByDate?.nominal_jenis.operasional || 0) / (pengeluaranStore.dataByDate?.total_pengeluaran || 0) * 100)} width={50} trailColor="#ffec3d" strokeColor="#13c2c2" strokeWidth={15} style={{ color: 'white' }} />
+                            <Progress type="circle" percent={toPercentByCategory(pengeluaranStore.dataByDate?.nominal_jenis.operasional, pengeluaranStore.dataByDate?.total_pengeluaran)} width={50} trailColor="#ffec3d" strokeColor="#13c2c2" strokeWidth={15} style={{ color: 'white' }} />
                             <Typography style={{ fontWeight: 500, color: '#876800', fontSize: 12, marginTop: 3 }}>Operasional</Typography>
                             <Typography style={{ fontWeight: 500, color: 'black', fontSize: 12 }}>Rp {Number(pengeluaranStore.dataByDate?.nominal_jenis.operasional).toLocaleString()}</Typography>
                         </div>
                         </Col>
                         <Col style={{ backgroundColor: '#fadb14', height: 120, borderRadius: 5, padding: 10}} xs={{ span: 7, offset: 1 }} lg={{ span: 6, offset: 2 }}>
                         <div style={{ textAlign: "center", marginBottom: 10 }}>
-                            <Progress type="circle" percent={Math.floor((pengeluaranStore.dataByDate?.nominal_jenis.gaji || 0) / (pengeluaranStore.dataByDate?.total_pengeluaran || 0) * 100)} width={50} trailColor="#ffec3d" strokeColor="#eb2f96" strokeWidth={15} style={{ color: 'white' }} />
+                            <Progress type="circle" percent={toPercentByCategory(pengeluaranStore.dataByDate?.nominal_jenis.gaji, pengeluaranStore.dataByDate?.total_pengeluaran)} width={50} trailColor="#ffec3d" strokeColor="#eb2f96" strokeWidth={15} style={{ color: 'white' }} />
                             <Typography style={{ fontWeight: 500, color: '#876800', fontSize: 12, marginTop: 3 }}>gaji</Typography>
                             <Typography style={{ fontWeight: 500, color: 'black', fontSize: 12 }}>Rp {Number(pengeluaranStore.dataByDate?.nominal_jenis.gaji).toLocaleString()}</Typography>
                         </div>
