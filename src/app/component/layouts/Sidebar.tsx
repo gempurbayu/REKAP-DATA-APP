@@ -1,4 +1,4 @@
-import { CloseOutlined, CreditCardOutlined, FileOutlined, MinusSquareOutlined, PieChartOutlined, PlusSquareOutlined, TeamOutlined } from '@ant-design/icons';
+import { CloseOutlined, CreditCardOutlined, MinusSquareOutlined, PieChartOutlined, PlusSquareOutlined } from '@ant-design/icons';
 import { Drawer, Menu, MenuProps } from 'antd'
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
